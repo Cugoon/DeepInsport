@@ -1,0 +1,8 @@
+0 address
+1 takeback
+2 backswing
+3 top
+4 down
+5 impact
+6 followthrough
+7 finish
