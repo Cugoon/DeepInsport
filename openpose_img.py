@@ -2,11 +2,15 @@ import sys
 import cv2
 import os
 from sys import platform
-import argparse
+
+#from test import *
 
 
 
 dir_path = r"D:\openpose\build"
+
+
+
 try:
     # Windows Import
     if platform == "win32":
@@ -56,19 +60,25 @@ class Opnenpose(object):
 
 if __name__ == "__main__":
     OP = Opnenpose()
-    cap = cv2.VideoCapture(r"D:\NexTep\Main_code\video\1.JENNIE_SOLO.mp4")
+    #cap = cv2.VideoCapture(r"D:\NexTep\Main_code\video\1.JENNIE_SOLO.mp4")
+    cap = cv2.VideoCapture(r"D:\test\DeepInSpr\Video\TigerWoods\Front\TigerWoods_Front.mp4")
     #cap = cv2.VideoCapture(r"rtsp://admin:123456@192.168.0.216:8554/live")
     # cap = cv2.VideoCapture(0)
+    img = cv2.imread(r"D:\test\DeepInSpr\Collin.jpg")
+    #pro_action(cap)
 
     while (cap.isOpened()):
+
         ret, frame = cap.read()
         if ret:
             try:
                 #OP = Opnenpose()
                 OP.out_frame(frame)
-                cv2.imshow("OpenPose 1.5.1 - Tutorial Python API", OP.datum.cvOutputData)
+                OP.out_img(img)
 
-                #cv2.imshow("OpenPose 1.7.1 - Tutorial Python API", frame)
+                #cv2.imshow("OpenPose 1.5.1 - Tutorial Python API", OP.datum.cvOutputData)
+                cv2.imshow("img", OP.datum.cvOutputData)
+                cv2.imshow("OpenPose 1.7.1 - Tutorial Python API", frame)
 
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break

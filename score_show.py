@@ -8,15 +8,11 @@ matplotlib.use('Qt5Agg')
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from PyQt5 import QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-
 import matplotlib.pyplot as plt
 import sys
 import numpy as np
-
-#from MainUi import MainUi
-
 from numpy import *
+
 
 class score_App(QMainWindow):
     def __init__(self,scores, parent=None):
@@ -30,9 +26,10 @@ class score_App(QMainWindow):
         # 几个QWidgets
         self.resize(1920, 1200)
 
-        self.main_widget = QWidget()  # 创建窗口主部件 // 기본 위젯 만들기
-        self.main_widget.setObjectName("main_widget")   # 위젯 이름
-        self.main_layout = QGridLayout()  # 创建主部件的网格布局  메인 화면 그리드 레이아웃 생성
+        self.main_widget = QWidget()  # 创建窗口主部件
+        self.main_widget.setObjectName("main_widget")
+        self.main_layout = QGridLayout()  # 创建主部件的网格布局
+
 
         self.setCentralWidget(self.main_widget)
         self.main_widget.setStyleSheet('''#main_widget{border-image:url(./Ui_images/blackB.jpg);
@@ -49,10 +46,6 @@ class score_App(QMainWindow):
                                       'font-weight: 900;'                                                                                    
                                       'color: white;')
 
-
-
-
-
         self.fig = plt.Figure()
         self.canvas = FigureCanvas(self.fig)
 
@@ -65,8 +58,8 @@ class score_App(QMainWindow):
     def plot_(self):
         ax = self.fig.add_axes([0.1, 0.1, 0.8, 0.8])
         # ax.clear()  # 每次绘制一个函数时清空绘图
-        #x = linspace(-3, 3, 6000)
-        # 使用了eval函数 점수 표시
+        # x = linspace(-3, 3, 6000)
+        # 使用了eval函数
         ax.plot([x for x in range(len(self.scores))],self.scores,label = "Score")
         ax.plot([x for x in range(len(self.scores))], [np.mean(self.scores)]*len(self.scores),c = "r",label = "Score mean")
         ax.legend(loc='lower right', fontsize=10)
@@ -76,13 +69,8 @@ class score_App(QMainWindow):
         self.canvas.draw()
 
 
-"""    def on_MainPage(self):
-        the_window = MainUi()
-        self.close()
-        self.windowList.append(the_window)"""
 
-
-# 运行程序 프로그램 실행
+# 运行程序
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     main_window = score_App([66,99,33,44,56])

@@ -94,7 +94,6 @@ class Select_Pro(QMainWindow):
         the_window = Select_Angle(video_path,front_image,side_image)
         self.close()
         self.windowList.append(the_window)
-
     def onchick_select_pro3(self):
         video_path = r"Video/RoryMcIlroy/"
         front_image ="QPushButton{background-image:url(UI_images/icons/RoryMcIlroy_front.png);}"
@@ -102,7 +101,6 @@ class Select_Pro(QMainWindow):
         the_window = Select_Angle(video_path,front_image,side_image)
         self.close()
         self.windowList.append(the_window)
-
     def onchick_select_pro4(self):
         video_path = r"Video/TigerWoods/"
         front_image ="QPushButton{background-image:url(UI_images/icons/TigerWoods_front.png);}"
@@ -110,7 +108,6 @@ class Select_Pro(QMainWindow):
         the_window = Select_Angle(video_path,front_image,side_image)
         self.close()
         self.windowList.append(the_window)
-
     def onclick_next(self):
         the_window = Select_Pro_L()
         self.close()
@@ -142,7 +139,7 @@ class Select_Pro_L(QMainWindow):
         }
         ''')
         self.back_button = QPushButton("Back", self)
-        """方法setToolTip在用户将鼠标停留在按钮上时显示的消息"""    # 마우스 올려 놓을 시 메세지 표시
+        """方法setToolTip在用户将鼠标停留在按钮上时显示的消息"""
         self.back_button.setToolTip("This is an example button")
 
         """按钮坐标x = 100, y = 70"""
@@ -152,10 +149,8 @@ class Select_Pro_L(QMainWindow):
         # self.start_button.setStyleSheet("QPushButton{border-image: url(UI_images/CollinMorikawa.png)}")
         self.back_button.setStyleSheet(
             'background-color:rgb(192,192,190);border-radius: 10px; border: 5px groove gray;border-style: outset;')
-
-        """按钮与鼠标点击事件相关联"""        # 마우스 클릭 이벤트
+        """按钮与鼠标点击事件相关联"""
         self.back_button.clicked.connect(self.oncick_Back)
-        
         self.Pro1_button = QPushButton(self)
         self.Pro1_button.setGeometry(QRect(250, 400, 180, 360))
         self.Pro1_button.setStyleSheet("QPushButton{background-image:url(UI_images/icons/YealimiNoh_.png);}")
@@ -211,11 +206,10 @@ class Select_Pro_L(QMainWindow):
         self.close()
         self.windowList.append(the_window)
 
-    def oncick_Back(self):  # 뒤로가기
+    def oncick_Back(self):
         the_window = Select_Pro()
         self.close()
         self.windowList.append(the_window)
-
 def main():
     app = QApplication(sys.argv)
     

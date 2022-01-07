@@ -7,11 +7,14 @@ import cv2
 import os
 from PyQt5.QtMultimediaWidgets import QVideoWidget
 
+
+
 import qtawesome
 import functools
 import sys
 from PyQt5 import QtCore
 from Motion_window import *
+
 
 class Select_Video(QMainWindow):
 
@@ -41,7 +44,7 @@ class Select_Video(QMainWindow):
 
         }
         ''')
-        #Local Video 버튼
+
         self.local_button = QPushButton("Local Video", self)
         self.local_button.setGeometry(QRect(800, 400, 200, 50))
         self.local_button.setStyleSheet("QPushButton{color:black;font:bold 20px;}"
@@ -51,8 +54,6 @@ class Select_Video(QMainWindow):
                                         "QPushButton:pressed{background-color:rgb(180,180,180);border: None;}")
         self.local_button.clicked.connect(self.onchick_select_local)
 
-
-        #Camera Video 버튼
         self.camera_button = QPushButton("Open Camera", self)
         self.camera_button.setGeometry(QRect(800, 500, 200, 50))
         self.camera_button.setStyleSheet("QPushButton{color:black;font:bold 20px;}"
@@ -63,7 +64,7 @@ class Select_Video(QMainWindow):
         self.camera_button.clicked.connect(self.onchick_select_camera)
         self.show()
 
-    def onchick_select_local(self): #로컬 비디오 선택
+    def onchick_select_local(self):
         openfile_name = QFileDialog.getOpenFileName(self, 'open file', '', 'Excel files(*.mp4 , *.avi)')
         print(openfile_name[0])
         self.user_video = openfile_name[0]
@@ -72,7 +73,7 @@ class Select_Video(QMainWindow):
         self.windowList.append(the_window)
         self.close()
 
-    def onchick_select_camera(self):    #카메라 비디오 선택
+    def onchick_select_camera(self):
         self.user_video = 0
         the_window = Motion_ex_window(self.target_path,self.user_video)
         self.windowList.append(the_window)
@@ -83,6 +84,7 @@ def main():
     app = QApplication(sys.argv)
     video_path = r'Video/DustinJohnson/Front/DustinJohnson_Front.mp4'
     gui = Select_Video(video_path)
+
 
     gui.show()
 

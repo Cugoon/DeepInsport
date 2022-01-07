@@ -38,18 +38,18 @@ class Select_Pro_L(QMainWindow):
 
         }
         ''')
-        self.back_button = QPushButton("Back", self)    # 마우스 올릴 떄 툴팁
+        self.back_button = QPushButton("Back", self)
         """方法setToolTip在用户将鼠标停留在按钮上时显示的消息"""
         self.back_button.setToolTip("This is an example button")
 
-        """按钮坐标x = 100, y = 70"""   #버튼 좌표
+        """按钮坐标x = 100, y = 70"""
         # self.start_button.move(100,240)
         self.back_button.setGeometry(QRect(100, 240, 120, 28))
 
         # self.start_button.setStyleSheet("QPushButton{border-image: url(UI_images/CollinMorikawa.png)}")
         self.back_button.setStyleSheet(
             'background-color:rgb(192,192,190);border-radius: 10px; border: 5px groove gray;border-style: outset;')
-        """按钮与鼠标点击事件相关联"""  # 마우스 클릭 이벤트
+        """按钮与鼠标点击事件相关联"""
         self.back_button.clicked.connect(self.oncick_Back)
         self.Pro1_button = QPushButton(self)
         self.Pro1_button.setGeometry(QRect(250, 400, 180, 360))

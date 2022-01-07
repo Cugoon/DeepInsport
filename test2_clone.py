@@ -7,10 +7,9 @@ import cv2
 # 모델 위치
 import Openpose, os
 
-#model = load_model('.\Models\keras_model.h5')
-model = load_model('.\Models\golf_side.h5')
-#filePath = r"D:\test\DeepInSpr\Video\TigerWoods\Front\TigerWoods_Front.mp4"
-filePath =r"D:\test\DeepInSpr_211231\Video\CollinMorikawa\Front\CollinMorikawa_Front.mp4"
+model = load_model('.\Models\keras_model.h5')
+
+filePath = r"D:\test\DeepInSpr\Video\TigerWoods\Front\TigerWoods_Front.mp4"
 player = os.path.basename(filePath)
 player = player[:-4]
 # 카메라를 제어할 수 있는 객체
@@ -19,6 +18,7 @@ cap = cv2.VideoCapture(filePath)
 
 #cap = Openpose.datum.cvOutputData
 
+
 # 카메라 길이 너비 조절
 capture.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
@@ -26,17 +26,17 @@ capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
 
-"""prediction = {0: 'address', 1: 'take back', 2: 'back swing', 3: 'top swing', 4: 'down swing', 5: 'impact',
-              6: 'follow through', 7: 'finish'}"""
+prediction = {0: 'address', 1: 'take back', 2: 'back swing', 3: 'top swing', 4: 'down swing', 5: 'impact',
+              6: 'follow through', 7: 'finish'}
 
-prediction = {0: 'Address', 1: 'Toe-up', 2: 'Mid-Back swing', 3: 'Top', 4: 'Mid-Down swing', 5: 'Impact', 6: 'Mid-Follow-Through', 7: 'Finish'}
+
+
 
 # 이미지 처리하기
 def preprocessing(frame):
     # frame_fliped = cv2.flip(frame, 1)
     # 사이즈 조정 티쳐블 머신에서 사용한 이미지 사이즈로 변경.
     size = (224, 224)
-    #size = (96, 96)
     frame_resized = cv2.resize(frame, size, interpolation=cv2.INTER_AREA)
 
     # 이미지 정규화
@@ -46,7 +46,6 @@ def preprocessing(frame):
     # 이미지 차원 재조정 - 예측을 위해 reshape 해줍니다.
     # keras 모델에 공급할 올바른 모양의 배열 생성
     frame_reshaped = frame_normalized.reshape((1, 224, 224, 3))
-#    frame_reshaped = frame_normalized.reshape((1, 96, 96, 3))
 
     # print(frame_reshaped)
 
@@ -60,9 +59,9 @@ def maxScore(data) :
 
     return result
 
-def find_index(num, data):
+def find_index(num,data):
     index = []
-    for i in range(len(data)):
+    for i in range(len(data)) :
         if data[i] == num:
             index.append(i)
 
@@ -80,6 +79,8 @@ def predict(frame):
 def imageTextInput(text):
     cv2.putText(frame, 'process: ' + text, (0, 80), cv2.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 2)
 
+
+
 # prediction = {0: 'address', 1: 'take back',
 #               2: 'back swing', 3: 'top swing',
 #               4: 'down swing', 5: 'impact',
@@ -89,6 +90,10 @@ def imageTextInput(text):
 #               2: 'Mid-Back swing', 3: 'Top',
 #               4: 'Mid-Down swing', 5: 'Impact',
 #               6: 'Mid-Follow-Through', 7: 'Finish'}
+
+
+
+
 while True:
     ret, frame = cap.read()
 
@@ -100,34 +105,34 @@ while True:
     cv2.putText(frame, player, (0, 150), cv2.FONT_HERSHEY_PLAIN, 5, (0, 0, 255), 2)
 
     if prediction == 0 :
-        imageTextInput('Address')
+        imageTextInput('address')
 
     elif prediction == 1 :
-        imageTextInput('Toe-up')
-        #cv2.imshow("VideoFrame", frame)
+        imageTextInput('take back')
+        cv2.imshow("VideoFrame", frame)
 
     elif prediction == 2 :
-        imageTextInput('Mid-Back swing')
+        imageTextInput('back swing')
         #cv2.imshow("VideoFrame", frame)
 
     elif prediction == 3 :
-        imageTextInput('Top')
+        imageTextInput('top swing')
         #cv2.imshow("VideoFrame", frame)
 
     elif prediction == 4 :
-        imageTextInput('Mid-Down swing')
+        imageTextInput('down swing')
         #cv2.imshow("VideoFrame", frame)
 
     elif prediction == 5 :
-        imageTextInput('Impact')
+        imageTextInput('impact')
         #cv2.imshow("VideoFrame", frame)
 
     elif prediction == 6 :
-        imageTextInput('Mid-Follow-Through')
+        imageTextInput('follow through')
         #cv2.imshow("VideoFrame", frame)
 
     elif prediction == 7 :
-        imageTextInput('Finish')
+        imageTextInput('finish')
         #cv2.imshow("VideoFrame", frame)
 
     cv2.imshow("VideoFrame", frame)
